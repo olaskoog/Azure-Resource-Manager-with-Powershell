@@ -1,4 +1,4 @@
-﻿Switch-AzureMode AzureResourceManager
+Switch-AzureMode AzureResourceManager
 
 #region publicIPAddresses
 #Resource Types: Microsoft.Network/publicIPAddresses
@@ -10,8 +10,10 @@ Get-AzurePublicIpAddress # get an existing public IP address.
 #Example
 $vip = New-AzurePublicIpAddress -ResourceGroupName "mvaiias2" -Name "VIP1" -Location "West US" -AllocationMethod Dynamic -DomainNameLabel "mvaiaasv2"
 #endregion
+
 #region virtualNetworks
 #Resource Types: Microsoft.Network/virtualNetworks
+
 Set-AzureVirtualNetwork # specifies the desired state of a VNET
 Remove-AzureVirtualNetwork # remove a VNET
 New-AzureVirtualNetwork # create a new VNET
@@ -27,6 +29,7 @@ $subnet = New-AzureVirtualNetworkSubnetConfig -Name "Subnet-1" -AddressPrefix "1
 $vnet = New-AzureVirtualNetwork -Name "VNET" -ResourceGroupName "mvaiias2" -Location "West US" -AddressPrefix "10.0.0.0/16" -Subnet $subnet
 $subnet = Get-AzureVirtualNetworkSubnetConfig -Name $subnetName -VirtualNetwork $vnet
 #endregion
+
 #region loadBalancers
 #Resource Types: Microsoft.Network/loadBalancers
 
@@ -44,6 +47,7 @@ $healthProbe = New-AzureLoadBalancerProbeConfig -Name "HealthProbe" -RequestPath
 $lbrule = New-AzureLoadBalancerRuleConfig -Name "HTTP" -FrontendIpConfiguration $feIpConfig1 -BackendAddressPool $beAddressPool -Probe $healthProbe -Protocol Tcp -FrontendPort 80 -BackendPort 80
 $alb = New-AzureLoadBalancer -ResourceGroupName "SomeResourceGroup" -Name "ALB" -Location "West US" -FrontendIpConfiguration $feIpConfig -InboundNatRule $inboundNATRule1,$inboundNatRule2 -LoadBalancingRule $lbrule -BackendAddressPool $beAddressPool -Probe $healthProbe
 #endregion
+
 #region networkInterface
 #Resource Types: Microsoft.Network/networkInterfaces
 
@@ -58,8 +62,10 @@ Add-AzureVMNetworkInterface # add a network interface to a VM configuration
 $nic1 = New-AzureNetworkInterface -ResourceGroupName $resourceGroupName -Name "nic1" -Subnet "Subnet-1" -Location "West US" -LoadBalancerInboundNatRule $alb.InboundNatRules[0] -LoadBalancerBackendAddressPool $alb.BackendAddressPools[0]
 $nic2 = New-AzureNetworkInterface -ResourceGroupName $resourceGroupName -Name "nic2" -Subnet "Subnet-1" -Location "West US" -LoadBalancerInboundNatRule $alb.InboundNatRules[1] -LoadBalancerBackendAddressPool $alb.BackendAddressPools[0]
 #endregion
+
 #region storageAccounts
 #Resource Types: Microsoft.Storage/storageAccounts
+
 Set-AzureStorageAccount # specify the desired state of a storage account
 Remove-AzureStorageAccount # remove a storage account
 New-AzureStorageAccountKey # regenerate the account key of a storage account
@@ -70,8 +76,10 @@ Get-AzureStorageAccount # retrieve a storage account configuration
 #Example
 New-AzureStorageAccount -ResourceGroupName "mvaiias2" -Name "mvaiias2" -Location "West US" -Type Standard_LRS
 #endregion
+
 #region availibilitySets
 #Resource Types: Microsoft.Compute/availabilitySets
+
 Remove-AzureAvailabilitySet # remove an availability set
 New-AzureAvailabilitySet # create a new availability set
 Get-AzureAvailabilitySet # retrieve an availability set configuration
@@ -79,8 +87,10 @@ Get-AzureAvailabilitySet # retrieve an availability set configuration
 #Example
 New-AzureAvailabilitySet -ResourceGroupName "SomeResourceGroup" -Name "AVSet" -Location "West US"
 #endregion
+
 #region virtualMachines
 #Resource Types: Microsoft.Compute/virtualMachines
+
 New-AzureVMConfig # create a new VM configuration
 Set-AzureVMOperatingSystem # specify the OS
 Set-AzureVMSourceImage # specify the image used to create the VM
