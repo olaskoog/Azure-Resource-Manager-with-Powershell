@@ -2,6 +2,10 @@
 
 $testName = "mvaiaasv2twovm"
 
+$publisher = "MicrosoftWindowsServer"
+$offer = "WindowsServer"
+$sku = "2012-R2-Datacenter"
+$version = "latest"
 
 $resourceGroupName = $testName
 $location = "West US"
